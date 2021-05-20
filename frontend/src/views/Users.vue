@@ -1,11 +1,12 @@
 <template>
 	<v-main>
 		<v-container>
+			<h1>Groupomania Utilisateurs</h1>
 			<nav>
 				<v-toolbar class="hidden-sm-and-down mx-2 fontHeader">
 					<v-toolbar-title>
 						<RouterLink
-							style="text-decoration: none; color: inherit;"
+							style="text-decoration: none; color:white;"
 							class="title font-weight-bold"
 							to="Groupomania"
 							>Accueil</RouterLink
@@ -14,7 +15,7 @@
 					<v-toolbar-title class="title font-weight-bold mx-auto"></v-toolbar-title>
 					<v-toolbar-title>
 						<RouterLink
-							style="text-decoration: none; color: inherit;"
+							style="text-decoration: none; color:white;"
 							class="title font-weight-bold"
 							to="administration"
 							>Dernière Publication</RouterLink
@@ -51,10 +52,12 @@
 					alt="avatar"
 					src="/../img/User_icon_2.svg.png"
 				></v-img>
-				<span class="title font-weight-bold">Pseudo : {{ user.pseudo }}</span>
-				<p class="title font-weight-bold">Email : {{ user.email }}</p>
-				<p class="title font-weight-bold">Date de création :{{ user.createdAt }}</p>
-				<v-btn color="error" @click="deleteUser(user)"> Supprimer </v-btn>
+				<h2 class="title font-weight-bold">Pseudo : {{ user.pseudo }}</h2>
+				<h2 class="title font-weight-bold">Email : {{ user.email }}</h2>
+				<h2 class="title font-weight-bold">Date de création :{{ user.createdAt }}</h2>
+				<v-btn color="white" @click="deleteUser(user)">
+					Supprimer
+				</v-btn>
 			</v-card>
 			{{ error }}
 		</v-container>
@@ -100,12 +103,8 @@ export default {
 }
 
 .fontHeader {
-	background: linear-gradient(
-		90deg,
-		rgba(255, 255, 255, 1) 20%,
-		rgba(0, 212, 255, 1) 50%,
-		transparent
-	);
+	background: linear-gradient(90deg, rgb(139, 0, 0) 0%, rgb(139, 0, 0) 90%);
+	color: white;
 }
 
 .profilUser {
@@ -113,9 +112,10 @@ export default {
 	overflow: hidden;
 	flex: 1 0 auto;
 	max-width: 20%;
+	height: 150px;
 	display: flex;
 	float: left;
-	border-radius: 70px;
+	border-radius: 10px;
 	margin-right: 20px;
 }
 

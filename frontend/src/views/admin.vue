@@ -1,16 +1,17 @@
 <template>
 	<v-main>
 		<v-container>
+			<h1>Groupomania Publications</h1>
 			<v-toolbar class="hidden-sm-and-down mx-2 fontHeader">
 				<v-toolbar-title>
 					<RouterLink
-						style="text-decoration: none; color: inherit;"
+						style="text-decoration: none; color:white;"
 						class="title font-weight-bold"
 						to="Groupomania"
 						>Accueil</RouterLink
 					>
 				</v-toolbar-title>
-				<v-toolbar-title class="title font-weight-bold mx-auto"
+				<v-toolbar-title class="title font-weight-bold mx-auto" style="color:white;"
 					>Publications</v-toolbar-title
 				>
 			</v-toolbar>
@@ -24,9 +25,9 @@
 					<v-icon large left> </v-icon>
 					<span class="title font-weight-bold"> {{ message.User.pseudo }}</span>
 				</v-card-title>
-				<h3>
+				<h2>
 					{{ message.title }}
-				</h3>
+				</h2>
 				<v-img :src="message.imageUrl"></v-img>
 				<p>
 					{{ message.content }}
@@ -69,14 +70,9 @@ export default {
 </script>
 <style>
 .fontHeader {
-	background: linear-gradient(
-		90deg,
-		rgba(255, 255, 255, 1) 20%,
-		rgba(0, 212, 255, 1) 50%,
-		transparent
-	);
+	background: linear-gradient(90deg, rgb(139, 0, 0) 0%, rgb(139, 0, 0) 90%);
+	color: white;
 }
-
 .v-main {
 	background-image: url("/../img/company.jpg");
 	background-size: cover;
@@ -84,13 +80,7 @@ export default {
 }
 
 .fontss {
-	background: linear-gradient(
-		90deg,
-		rgba(255, 255, 255, 1) 0%,
-		rgba(9, 9, 121, 1) 35%,
-		rgba(0, 212, 255, 1) 50%,
-		transparent
-	);
+	background-color: #1f263b;
 	color: white;
 }
 </style>

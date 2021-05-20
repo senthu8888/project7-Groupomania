@@ -3,11 +3,15 @@
 		<v-container>
 			<nav>
 				<v-toolbar src="" class="hidden-sm-and-down fontHeader">
+					<h1>Groupomania</h1>
 					<v-toolbar-title>
 						<v-toolbar-title class="font-weight-bold" color="black">
-							<RouterLink class="text-decoration-none" to="Profile"
+							<RouterLink
+								class="text-decoration-none"
+								style="color:white"
+								to="Profile"
 								>Bienvenue {{ user.pseudo }}
-								<v-icon>mdi-account-circle</v-icon></RouterLink
+								<v-icon style="color:white">mdi-account-circle</v-icon></RouterLink
 							>
 						</v-toolbar-title></v-toolbar-title
 					>
@@ -23,7 +27,8 @@
 						@click="logout()"
 						src="../img/logout-svgrepo-com.svg"
 						alt="logout"
-						>Déconnecter <v-icon>mdi-logout</v-icon></v-toolbar-title
+						>Déconnecter
+						<v-icon style="color:white">mdi-logout</v-icon></v-toolbar-title
 					>
 				</v-toolbar>
 				<v-toolbar ap class="hidden-md-and-up nav-container fontHeader">
@@ -54,19 +59,15 @@
 					</v-toolbar-items>
 				</v-navigation-drawer>
 			</nav>
-			<v-card class="mx-auto pa-4 mt-1 fontHeader" max-width="600px">
-				<v-toolbar>
+			<v-card class="mx-auto pa-4 mt-1" max-width="600px">
+				<v-toolbar class="fontHeader">
 					<v-toolbar-title class="font-weight-bold" color="black"
 						>Ajouter une publication</v-toolbar-title
 					>
 					<v-spacer></v-spacer>
-					<v-btn fab small @click="isEditing = !isEditing">
-						<v-icon v-if="isEditing">
-							mdi-close
-						</v-icon>
-						<v-icon v-else>
-							mdi-pencil
-						</v-icon>
+					<v-btn type="button" @click="isEditing = !isEditing">
+						Cliquez-moi
+						<v-icon title="Modifier"> mdi-pencil </v-icon>
 					</v-btn>
 				</v-toolbar>
 				<v-form
@@ -80,16 +81,18 @@
 						:disabled="!isEditing"
 						v-model="title"
 						color="black"
+						label="Titre"
 					></v-text-field>
 					<v-label class="publication">Contenu</v-label>
 					<v-text-field
 						:disabled="!isEditing"
 						v-model="content"
 						color="white"
+						label="Contenu"
 						item-text="name"
 					>
 					</v-text-field>
-					<v-file-input ref="file" @change="selectFile"></v-file-input>
+					<v-file-input ref="file" label="images" @change="selectFile"></v-file-input>
 
 					<v-divider></v-divider>
 					<v-spacer></v-spacer>
@@ -115,16 +118,19 @@
 							}"
 						>
 							<v-btn v-bind="attrs" v-on="on">
-								<v-icon>mdi-tune</v-icon>
+								Modifier
 							</v-btn>
 						</template>
 						<v-list class="d-flex flex-column">
-							<v-icon
+							<v-btn
 								color="blue"
 								v-if="message.userId == user.id"
 								@click="edit = message.id"
-								>mdi-pencil
-							</v-icon>
+							>
+								Modifier
+								<v-icon>mdi-pencil</v-icon>
+							</v-btn>
+
 							<v-icon
 								color="red"
 								v-if="message.userId == user.id || user.isAdmin == true"
@@ -202,15 +208,15 @@
 									attrs,
 								}"
 							>
-								<v-icon
+								<v-btn
 									class="px-2"
 									v-bind="attrs"
 									v-on="on"
 									color="green"
 									@click="userLike(message)"
-									>mdi-thumb-up</v-icon
-								>
-								<span>{{ countLike }} </span>
+									>Like<v-icon>mdi-thumb-up</v-icon>
+									<span>{{ countLike }} </span>
+								</v-btn>
 							</template>
 							<span>J'aime !</span>
 						</v-tooltip>
@@ -223,15 +229,16 @@
 									attrs,
 								}"
 							>
-								<v-icon
+								<v-btn
 									class="px-2"
 									color="red"
 									v-bind="attrs"
 									v-on="on"
 									@click="userDislike(message)"
-									>mdi-thumb-down</v-icon
-								>
-								<span>{{ countDisLike }}</span>
+									>Unlike
+									<v-icon>mdi-thumb-down</v-icon>
+									<span>{{ countDisLike }}</span>
+								</v-btn>
 							</template>
 							<span>J'aime pas !</span>
 						</v-tooltip>
@@ -239,27 +246,28 @@
 				</div>
 				<v-card elevation="9" color="#FFF">
 					<div class="pa-2 my-2" v-for="item in items" :key="item.id">
-						<h3 v-if="item.messageId == message.id">
+						<h2 v-if="item.messageId == message.id">
 							{{ item.pseudo }}
-						</h3>
+						</h2>
 						<p v-if="item.messageId == message.id">
 							{{ item.comment }}
 						</p>
 
 						<small v-if="item.messageId == message.id">{{ item.createdAt }} </small>
-						<v-icon
+						<v-btn
 							v-if="item.messageId == message.id"
 							color="primary"
 							@click="edit = item.id"
-							>mdi-pencil
-						</v-icon>
-
-						<v-icon
+						>
+							Modifier
+						</v-btn>
+						<v-btn
 							v-if="item.messageId == message.id"
 							class="btn"
 							@click="removeComment(item)"
-							>mdi-delete</v-icon
 						>
+							Supprimer
+						</v-btn>
 						<form class="edit-comment" v-if="edit === item.id">
 							<label for="message.message_id"> {{ item.pseudo }} : </label><br />
 							<textarea id="message.message_id" rows="1" v-model="item.comment">
@@ -284,19 +292,22 @@
 						</form>
 					</div>
 
-					<div class="comment" color="red">
-						<label for="add-comment" class="bold"> {{ user.pseudo }}</label
-						><br />
-						<textarea
-							id="add-comment"
-							rows="1"
-							v-model="comment"
-							placeholder="Ajouter commentaire"
-						></textarea>
-
-						<v-icon class="btn btn-primary btn-block" @click="postComment(message)"
-							>mdi-check</v-icon
-						>
+					<div class="commentary" color="red">
+						<label class="bold"
+							>Commentaire de {{ user.pseudo }} <br />
+							<textarea
+								id="add-comment"
+								name="add-comment"
+								rows="1"
+								v-model="comment"
+								label="Ajouter Commentaire"
+							></textarea>
+						</label>
+						<br />
+						<v-btn type="button" @click="postComment(message)">
+							OK
+							<v-icon>mdi-check</v-icon>
+						</v-btn>
 					</div>
 				</v-card>
 			</v-card>
@@ -521,23 +532,13 @@ export default {
 	display: flex;
 }
 .fontss {
-	background: linear-gradient(
-		90deg,
-		rgba(2, 0, 36, 1) 0%,
-		rgba(9, 9, 121, 1) 35%,
-		rgba(0, 212, 255, 1) 50%,
-		transparent
-	);
+	background-color: #1f263b;
 	color: white;
 }
 
 .fontHeader {
-	background: linear-gradient(
-		90deg,
-		rgba(255, 255, 255, 1) 20%,
-		rgba(0, 212, 255, 1) 50%,
-		transparent
-	);
+	background: linear-gradient(90deg, rgb(139, 0, 0) 0%, rgb(139, 0, 0) 90%);
+	color: white;
 }
 .v-application .text-decoration-none {
 	margin: 30px;
@@ -582,10 +583,10 @@ export default {
 	padding: 2px !important;
 }
 .v-sheet.v-card {
-	border-radius: 40px;
+	border-radius: 20px;
 }
 
-.comment {
+.commentary {
 	color: black;
 	margin-top: 0px !important;
 	margin-bottom: 0px !important;

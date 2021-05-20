@@ -1,10 +1,11 @@
 <template>
 	<v-main>
 		<v-container>
+			<h1>Groupomania Profil</h1>
 			<v-toolbar class="hidden-sm-and-down mx-2 fontHeader">
 				<v-toolbar-title>
 					<RouterLink
-						style="text-decoration: none; color: inherit;"
+						style="text-decoration: none; color:white;"
 						class="title font-weight-bold"
 						to="Groupomania"
 						>Accueil</RouterLink
@@ -19,8 +20,8 @@
 				></v-img>
 				<span class="title font-weight-bold">Pseudo : {{ user.pseudo }}</span>
 
-				<p class="title font-weight-bold">Email : {{ user.email }}</p>
-				<p class="title font-weight-bold">Date de création :{{ user.createdAt }}</p>
+				<h2 class="title font-weight-bold">Email : {{ user.email }}</h2>
+				<h2 class="title font-weight-bold">Date de création :{{ user.createdAt }}</h2>
 				<v-btn color="error" class="bb" @click="deleteUser(user)"> Supprimer</v-btn>
 				<v-btn @click="edit = user.id" class="bb"> Modifier </v-btn>
 
@@ -111,12 +112,8 @@ export default {
 }
 
 .fontHeader {
-	background: linear-gradient(
-		90deg,
-		rgba(255, 255, 255, 1) 20%,
-		rgba(0, 212, 255, 1) 50%,
-		transparent
-	);
+	background: linear-gradient(90deg, rgb(139, 0, 0) 0%, rgb(139, 0, 0) 90%);
+	color: white;
 }
 
 .profilUser {
